@@ -8,6 +8,7 @@ public class StandardDO {
     private String file;
     private int province_id;
     private int city_id;
+    private String date;
 
     @Override
     public String toString() {
@@ -19,6 +20,7 @@ public class StandardDO {
                 ", file='" + file + '\'' +
                 ", province_id=" + province_id +
                 ", city_id=" + city_id +
+                ", date='" + date + '\'' +
                 '}';
     }
 
@@ -76,5 +78,13 @@ public class StandardDO {
 
     public void setCity_id(int city_id) {
         this.city_id = city_id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

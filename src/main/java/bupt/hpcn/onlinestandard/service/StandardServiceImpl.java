@@ -13,7 +13,7 @@ public class StandardServiceImpl implements StandardService{
     private StandardMapper standardMapper;
 
     @Override
-    public List<StandardDO> getStandardByBusiness() {
-        return standardMapper.getStandardByBusiness();
+    public List<StandardDO> getStandardByBusiness(int businessID) {
+        return standardMapper.getStandardByBusiness(businessID);
     }
 }

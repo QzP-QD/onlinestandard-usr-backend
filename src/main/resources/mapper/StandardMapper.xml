@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="bupt.hpcn.onlinestandard.mapper.StandardMapper">
-<!--    <resultMap id="Standard" type="bupt.hpcn.onlinestandard.domain.StandardDO">-->
-<!--        <id property="id" column="id"/>-->
-<!--        <result property="business_id" column="business_id"/>-->
-<!--        <result property="class_id" column="class_id"/>-->
-<!--        <result property="name" column="name"/>-->
-<!--        <result property="file" column="file"/>-->
-<!--        <result property="province_id" column="province_id"/>-->
-<!--        <result property="city_id" column="city_id"/>-->
-<!--    </resultMap>-->
     <select id="getStandardByBusiness" resultType="bupt.hpcn.onlinestandard.domain.StandardDO">
-        select * from standard_table
+        select * from standard_table where business_id = #{businessID}
     </select>
 </mapper>
