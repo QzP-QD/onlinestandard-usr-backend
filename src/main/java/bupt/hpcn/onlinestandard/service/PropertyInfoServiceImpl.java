@@ -13,7 +13,7 @@ public class PropertyInfoServiceImpl implements PropertyInfoService{
     private PropertyInfoMapper propertyInfoMapper;
 
     @Override
-    public List<JSONObject> getPropertyInfo(List<Integer> itemids) {
+    public List<JSONObject> getPropertyInfo(List<Integer> itemids) throws Exception{
         return propertyInfoMapper.getPropertyInfo(itemids);
     }
 }

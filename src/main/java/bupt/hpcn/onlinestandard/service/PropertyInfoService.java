@@ -7,5 +7,5 @@ import org.omg.CORBA.INTERNAL;
 import java.util.List;
 
 public interface PropertyInfoService {
-    List<JSONObject> getPropertyInfo(List<Integer> itemids);
+    List<JSONObject> getPropertyInfo(List<Integer> itemids) throws Exception;
 }

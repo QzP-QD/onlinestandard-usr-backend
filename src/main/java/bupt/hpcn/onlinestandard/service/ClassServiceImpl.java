@@ -13,7 +13,7 @@ public class ClassServiceImpl implements ClassService{
     private ClassMapper classMapper;
 
     @Override
-    public List<ClassDO> getMyClass(int id, String name) {
+    public List<ClassDO> getMyClass(int id, String name)throws Exception {
         return classMapper.getMyClass(id, name);
     }
 }

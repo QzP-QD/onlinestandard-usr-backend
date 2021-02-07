@@ -13,12 +13,12 @@ public class BusinessServiceImpl implements BusinessService{
     private BusinessMapper businessMapper;
 
     @Override
-    public List<BusinessDO> getBusiness() {
+    public List<BusinessDO> getBusiness() throws Exception{
         return businessMapper.getBusiness();
     }
 
     @Override
-    public int getBusinessId(String name) {
+    public int getBusinessId(String name) throws Exception{
         return businessMapper.getBusinessId(name);
     }
 }

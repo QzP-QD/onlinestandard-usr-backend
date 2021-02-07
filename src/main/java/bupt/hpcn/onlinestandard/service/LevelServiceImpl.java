@@ -13,7 +13,7 @@ public class LevelServiceImpl implements LevelService{
     private LevelMapper levelMapper;
 
     @Override
-    public List<JSONObject> getAll() {
+    public List<JSONObject> getAll()throws Exception {
         return levelMapper.getAll();
     }
 }

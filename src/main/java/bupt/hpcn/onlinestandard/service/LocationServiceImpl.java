@@ -14,12 +14,12 @@ public class LocationServiceImpl implements LocationService{
     private LocationMapper locationMapper;
 
     @Override
-    public List<ProvinceDO> getProvince() {
+    public List<ProvinceDO> getProvince() throws Exception{
         return locationMapper.getProvince();
     }
 
     @Override
-    public List<CityDO> getCity() {
+    public List<CityDO> getCity() throws Exception{
         return locationMapper.getCity();
     }
 }

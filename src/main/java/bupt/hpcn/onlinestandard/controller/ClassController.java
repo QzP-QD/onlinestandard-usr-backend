@@ -19,7 +19,7 @@ public class ClassController {
     private ClassService classService;
 
     @RequestMapping(value="/getClass", method= RequestMethod.GET)
-    public Object getMyClass(int id, String name){
+    public Object getMyClass(int id, String name) throws Exception{
         int selectID = id;
         String selectName = name;
         List<ClassDO> classList = classService.getMyClass(selectID, selectName);

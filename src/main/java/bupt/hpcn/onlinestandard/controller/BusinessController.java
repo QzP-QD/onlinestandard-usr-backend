@@ -17,7 +17,7 @@ public class BusinessController {
     private BusinessService businessService;
 
     @RequestMapping("/getBusiness")
-    public Object getBusiness(){
+    public Object getBusiness() throws Exception{
         List<BusinessDO> result = businessService.getBusiness();
         JSONObject jobj = new JSONObject();
         jobj.put("BusinessData",result);

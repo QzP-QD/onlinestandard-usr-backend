@@ -30,7 +30,7 @@ public class StandardController {
     private PropertyInfoService propertyInfoService;
 
     @RequestMapping(value="/getBybusiness", method=RequestMethod.GET)
-    public Object getByBusiness(String activeBusiness){
+    public Object getByBusiness(String activeBusiness) throws Exception{
         int businessID = businessService.getBusinessId(activeBusiness);
 
         int classID = 0; String className = "";
@@ -77,7 +77,7 @@ public class StandardController {
     }
 
     @RequestMapping(value="/getDetail", method=RequestMethod.GET)
-    public Object getDetial(int standardID){
+    public Object getDetial(int standardID) throws Exception{
         StandardDO resultDO = standardService.getStandardDetail(standardID);
         //"standardDetail"的内容
         JSONObject standardDetail = new JSONObject();
@@ -140,7 +140,7 @@ public class StandardController {
     }
 
     @RequestMapping(value="/MergePage", method=RequestMethod.POST)
-    public Object getMerge(@RequestParam(value = "idList") List<Integer> idList){
+    public Object getMerge(@RequestParam(value = "idList") List<Integer> idList) throws Exception{
         //1、获取所有的 standard_item 信息
         List<StandardItemDO> standardItemDOList = standardItemService.getStandardItemByStandard(idList);
 

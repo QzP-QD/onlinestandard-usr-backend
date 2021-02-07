@@ -20,7 +20,7 @@ public class LocationController {
     private LocationService locationService;
 
     @RequestMapping("/getLoc")
-    public Object getProv(){
+    public Object getProv() throws Exception{
         List<ProvinceDO> provList = locationService.getProvince();
         List<CityDO>  cityList = locationService.getCity();
         List<JSONObject> resultprov = new LinkedList<>();

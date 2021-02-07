@@ -13,7 +13,7 @@ public class StandardItemServiceImpl implements StandardItemService{
     private StandardItemMapper standardItemMapper;
 
     @Override
-    public List<StandardItemDO> getStandardItemByStandard(List<Integer> standardID) {
+    public List<StandardItemDO> getStandardItemByStandard(List<Integer> standardID) throws Exception{
         return standardItemMapper.getStandardItemByStandard(standardID);
     }
 }

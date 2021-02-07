@@ -5,5 +5,5 @@ import com.alibaba.fastjson.JSONObject;
 import java.util.List;
 
 public interface LevelService {
-    public List<JSONObject> getAll();
+    public List<JSONObject> getAll() throws Exception;
 }
