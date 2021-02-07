@@ -13,7 +13,7 @@ public class ClassServiceImpl implements ClassService{
     private ClassMapper classMapper;
 
     @Override
-    public List<ClassDO> getClass(int id, String name) {
-        return classMapper.getClass(id, name);
+    public List<ClassDO> getMyClass(int id, String name) {
+        return classMapper.getMyClass(id, name);
     }
 }

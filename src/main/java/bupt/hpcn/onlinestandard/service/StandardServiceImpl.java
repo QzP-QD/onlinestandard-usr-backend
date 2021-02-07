@@ -16,4 +16,14 @@ public class StandardServiceImpl implements StandardService{
     public List<StandardDO> getStandardByBusiness(int businessID) {
         return standardMapper.getStandardByBusiness(businessID);
     }
+
+    @Override
+    public StandardDO getStandardDetail(int standardID) {
+        return standardMapper.getStandardDetail(standardID);
+    }
+
+    @Override
+    public List<String> getNames(List<Integer> idList) {
+        return standardMapper.getNames(idList);
+    }
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="bupt.hpcn.onlinestandard.mapper.PropertyInfoMapper">
+    <select id="getPropertyInfo" resultType="com.alibaba.fastjson.JSONObject">
+        select
+            equipment_table.equip_name equipName,
+            equipment_table.equip_type equipType,
+            property_table.name propName,
+            item_property_table.item_id item_id
+        from
+            item_property_table, property_table, equipment_table
+        where
+            item_property_table.item_id in
+            <foreach collection="list" item="itemid" open="(" close=")" separator=",">
+                #{itemid}
+            </foreach>
+            and item_property_table.property_id = property_table.id
+            and property_table.equip_id = equipment_table.id
+    </select>
+
+</mapper>

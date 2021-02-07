@@ -10,5 +10,9 @@ import java.util.List;
 @Repository
 public interface StandardMapper {
     //通过 行业 获取场景标准
-    List<StandardDO> getStandardByBusiness(int businessID);
+    List<StandardDO> getStandardByBusiness(Integer businessID);
+    //通过 id 获取场景标准详情（仅standard_table中）
+    StandardDO getStandardDetail(Integer standardID);
+    //获取场景标准名称列表
+    List<String> getNames(List<Integer> idList);
 }

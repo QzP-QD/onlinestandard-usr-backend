@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface StandardService {
     List<StandardDO> getStandardByBusiness(int businessID);
+    StandardDO getStandardDetail(int standardID);
+    List<String> getNames(List<Integer> idList);
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="bupt.hpcn.onlinestandard.mapper.StandardItemMapper">
+    <resultMap type="bupt.hpcn.onlinestandard.domain.ItemDO" id="itemResultMap">
+        <id property="id" column="id"/>
+        <result property="second_level_id" column="second_level_id"/>
+        <result property="first_level_id" column="first_level_id"/>
+        <result property="short_cut" column="short_cut"/>
+        <result property="property_related" column="property_related"/>
+    </resultMap>
+    <resultMap type="bupt.hpcn.onlinestandard.domain.StandardItemDO" id="standardItemResultMap">
+        <id property="id" column="id"/>
+        <result property="standard_id" column="standard_id"/>
+        <result property="item_id" column="item_id"/>
+        <result property="property_related" column="property_related"/>
+        <result property="property_type" column="property_type"/>
+        <result property="value1" column="value_1"/>
+        <result property="value2" column="value_2"/>
+        <result property="required" column="required"/>
+        <association property="item" javaType="bupt.hpcn.onlinestandard.domain.ItemDO" resultMap="itemResultMap"/>
+    </resultMap>
+
+    <select id="getStandardItemByStandard" resultMap="standardItemResultMap">
+        select *
+        from standard_item_table, items_table
+        where standard_item_table.standard_id in
+            <foreach collection="list" item="itemid" open="(" close=")" separator=",">
+                #{itemid}
+            </foreach>
+            and standard_item_table.item_id = items_table.id
+    </select>
+</mapper>

@@ -4,4 +4,18 @@
     <select id="getStandardByBusiness" resultType="bupt.hpcn.onlinestandard.domain.StandardDO">
         select * from standard_table where business_id = #{businessID}
     </select>
+
+    <select id="getStandardDetail" resultType="bupt.hpcn.onlinestandard.domain.StandardDO">
+        select * from standard_table where id = #{standardID}
+    </select>
+
+    <select id="getNames" resultType="java.lang.String">
+        select name
+        from standard_table
+        where id in
+        <foreach collection="list" item="standardid" open="(" close=")" separator=",">
+            #{standardid}
+        </foreach>
+    </select>
+
 </mapper>
