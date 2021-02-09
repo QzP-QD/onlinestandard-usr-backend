@@ -140,7 +140,10 @@ public class StandardController {
     }
 
     @RequestMapping(value="/MergePage", method=RequestMethod.POST)
-    public Object getMerge(@RequestParam(value = "idList") List<Integer> idList) throws Exception{
+//    @RequestParam(value = "idList") List<Integer> idList
+    public Object getMerge() throws Exception{
+        List<Integer> idList = new LinkedList<>();
+        idList.add(12);idList.add(13);idList.add(14);
         //1、获取所有的 standard_item 信息
         List<StandardItemDO> standardItemDOList = standardItemService.getStandardItemByStandard(idList);
 
@@ -150,10 +153,20 @@ public class StandardController {
         //3、攒对象
         JSONObject resultobj = new JSONObject();
 
+        List<JSONObject> names = standardService.getNames(idList);
+        resultobj.put("names",names);
+
         List<JSONObject> items = new LinkedList<>();
         for(StandardItemDO sid: standardItemDOList){
             JSONObject temp = new JSONObject();
-            temp.put("item_name", sid.getItem_id());
+            temp.put("item_id", sid.getItem_id());
+            int standardID = sid.getStandard_id();
+            for(JSONObject item : names){
+                if(standardID == (Integer)item.get("id")){
+                    temp.put("standard_name", (String)item.get("name"));
+                    break;
+                }
+            }
             for(JSONObject obj : levelInfo){
                 if((Integer)obj.get("id") == sid.getItem().getSecond_level_id()){
                     temp.put("first_level", obj.get("firstName"));
@@ -165,9 +178,6 @@ public class StandardController {
             items.add(temp);
         }
         resultobj.put("items", items);
-
-        List<String> names = standardService.getNames(idList);
-        resultobj.put("names",names);
 
         return resultobj;
     }

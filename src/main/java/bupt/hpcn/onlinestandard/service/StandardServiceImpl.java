@@ -2,6 +2,7 @@ package bupt.hpcn.onlinestandard.service;
 
 import bupt.hpcn.onlinestandard.mapper.StandardMapper;
 import bupt.hpcn.onlinestandard.domain.StandardDO;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class StandardServiceImpl implements StandardService{
     }
 
     @Override
-    public List<String> getNames(List<Integer> idList) throws Exception{
+    public List<JSONObject> getNames(List<Integer> idList) throws Exception{
         return standardMapper.getNames(idList);
     }
 }
