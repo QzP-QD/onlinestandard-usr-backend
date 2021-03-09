@@ -72,6 +72,7 @@ public class StandardController {
 
         JSONObject resultobj = new JSONObject();
         resultobj.put("standardList",mylist);
+        resultobj.put("code",0);
 
         return resultobj;
     }
@@ -135,6 +136,7 @@ public class StandardController {
 
         standardDetail.put("items", items);
         resultobj.put("standardDetial", standardDetail);
+        resultobj.put("code",0);
 
         return resultobj;
     }
@@ -178,6 +180,7 @@ public class StandardController {
             items.add(temp);
         }
         resultobj.put("items", items);
+        resultobj.put("code",0);
 
         return resultobj;
     }
