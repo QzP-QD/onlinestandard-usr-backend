@@ -48,6 +48,7 @@ public class LocationController {
         JSONObject resultobj = new JSONObject();
         resultobj.put("provs", resultprov);
         resultobj.put("allCities", resultcity);
+        resultobj.put("code",0);
 
         return resultobj;
     }
