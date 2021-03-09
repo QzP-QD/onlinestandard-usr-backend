@@ -21,6 +21,7 @@ public class BusinessController {
         List<BusinessDO> result = businessService.getBusiness();
         JSONObject jobj = new JSONObject();
         jobj.put("BusinessData",result);
+        jobj.put("code",0);
 
         return jobj;
     }
