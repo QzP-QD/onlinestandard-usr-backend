@@ -6,6 +6,7 @@ import bupt.hpcn.onlinestandard.service.LocationService;
 import com.alibaba.fastjson.JSONObject;
 import netscape.javascript.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +20,7 @@ public class LocationController {
     @Autowired
     private LocationService locationService;
 
-    @RequestMapping("/getLoc")
+    @GetMapping("/getLoc")
     public Object getProv() throws Exception{
         List<ProvinceDO> provList = locationService.getProvince();
         List<CityDO>  cityList = locationService.getCity();
