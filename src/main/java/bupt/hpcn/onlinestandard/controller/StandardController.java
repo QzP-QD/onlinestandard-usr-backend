@@ -3,10 +3,12 @@ package bupt.hpcn.onlinestandard.controller;
 import bupt.hpcn.onlinestandard.domain.*;
 import bupt.hpcn.onlinestandard.mapper.LevelMapper;
 import bupt.hpcn.onlinestandard.service.*;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sun.awt.image.ImageWatched;
+import sun.rmi.server.InactiveGroupException;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -150,9 +152,11 @@ public class StandardController {
     }
 
     @PostMapping(value="/MergePage")
-    public Object getMerge() throws Exception{
-        List<Integer> idList = new LinkedList<>();
-        idList.add(12);idList.add(13);idList.add(14);
+    public Object getMerge(@RequestBody String idLists) throws Exception{
+        List<Integer> tempList = new LinkedList<>();
+
+        List<Integer> idList = JSONArray.parseArray(idLists,Integer.class);
+//        idList.add(12);idList.add(13);idList.add(14);
         //1、获取所有的 standard_item 信息
         List<StandardItemDO> standardItemDOList = standardItemService.getStandardItemByStandard(idList);
 
@@ -166,6 +170,7 @@ public class StandardController {
         resultobj.put("names",names);
 
         List<JSONObject> items = new LinkedList<>();
+        System.out.println(standardItemDOList.size());
         if(standardItemDOList.size() > 0){
             for(StandardItemDO sid: standardItemDOList){
                 JSONObject temp = new JSONObject();
