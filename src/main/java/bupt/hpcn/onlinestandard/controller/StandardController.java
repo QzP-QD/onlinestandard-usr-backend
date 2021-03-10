@@ -29,7 +29,7 @@ public class StandardController {
     @Autowired
     private PropertyInfoService propertyInfoService;
 
-    @RequestMapping(value="/getBybusiness", method=RequestMethod.GET)
+    @GetMapping(value="/getBybusiness")
     public Object getByBusiness(String activeBusiness) throws Exception{
         int businessID = businessService.getBusinessId(activeBusiness);
 
@@ -77,7 +77,7 @@ public class StandardController {
         return resultobj;
     }
 
-    @RequestMapping(value="/getDetail", method=RequestMethod.GET)
+    @GetMapping(value="/getDetail")
     public Object getDetial(int standardID) throws Exception{
         StandardDO resultDO = standardService.getStandardDetail(standardID);
         //"standardDetail"的内容
@@ -89,7 +89,6 @@ public class StandardController {
         List<Integer> standardIDs = new LinkedList<>();
         standardIDs.add(resultDO.getId());
         List<StandardItemDO> standardItemDOList = standardItemService.getStandardItemByStandard(standardIDs);
-
         //2、第一步中如果有关联设备，从property_table中通过嵌套item_property_table查询得到equip_id
         List<Integer> relatedID = new LinkedList<>();
         for(StandardItemDO sid: standardItemDOList){
@@ -97,7 +96,11 @@ public class StandardController {
                 relatedID.add(sid.getItem_id());
             }
         }
-        List<JSONObject> propertyInfo = propertyInfoService.getPropertyInfo(relatedID);
+
+        List<JSONObject> propertyInfo = new LinkedList<>();
+        if(relatedID.size() > 0){
+            propertyInfo = propertyInfoService.getPropertyInfo(relatedID);
+        }
 
         //3、获取first_level_table和second_level_table中的内容
         List<JSONObject> levelInfo = levelService.getAll();
@@ -106,32 +109,37 @@ public class StandardController {
         JSONObject resultobj = new JSONObject();
 
         List<JSONObject> items = new LinkedList<>();
-        for(StandardItemDO sid: standardItemDOList){
-            JSONObject temp = new JSONObject();
-            temp.put("item_id", sid.getItem_id());
-            for(JSONObject obj : levelInfo){
-                if((Integer)obj.get("id") == sid.getItem().getSecond_level_id()){
-                    temp.put("first_level", obj.get("firstName"));
-                    temp.put("second_level", obj.get("secondName"));
-                    break;
+        if(standardItemDOList.size() > 0){
+            for(StandardItemDO sid: standardItemDOList){
+                JSONObject temp = new JSONObject();
+                temp.put("item_id", sid.getItem_id());
+                for(JSONObject obj : levelInfo){
+                    if((Integer)obj.get("id") == sid.getItem().getSecond_level_id()){
+                        temp.put("first_level", obj.get("firstName"));
+                        temp.put("second_level", obj.get("secondName"));
+                        break;
+                    }
                 }
-            }
-            temp.put("detial", sid.getItem().getShort_cut());
-            temp.put("property_related", sid.isProperty_related());
-            temp.put("equip_name","");
-            temp.put("property_name","");
-            temp.put("property_type",sid.getProperty_type());
-            temp.put("value_1",sid.getValue1());
-            temp.put("value_2",sid.getValue2());
+                temp.put("detial", sid.getItem().getShort_cut());
+                temp.put("property_related", sid.isProperty_related());
+                temp.put("equip_name","");
+                temp.put("property_name","");
+                temp.put("property_type",sid.getProperty_type());
+                temp.put("value_1",sid.getValue1());
+                temp.put("value_2",sid.getValue2());
 
-            temp.put("requested", sid.isRequired());
-            for(JSONObject obj2: propertyInfo){
-                if(obj2.get("item_id") == temp.get("item_id")){
-                    temp.put("equip_name",obj2.get("equipName"));
-                    temp.put("property_name",obj2.get("propName"));
+                temp.put("requested", sid.isRequired());
+                if(relatedID.size() > 0){
+                    for(JSONObject obj2: propertyInfo){
+                        if(obj2.get("item_id") == temp.get("item_id")){
+                            temp.put("equip_name",obj2.get("equipName"));
+                            temp.put("property_name",obj2.get("propName"));
+                        }
+                    }
                 }
+
+                items.add(temp);
             }
-            items.add(temp);
         }
 
         standardDetail.put("items", items);
@@ -141,8 +149,7 @@ public class StandardController {
         return resultobj;
     }
 
-    @RequestMapping(value="/MergePage", method=RequestMethod.POST)
-//    @RequestParam(value = "idList") List<Integer> idList
+    @PostMapping(value="/MergePage")
     public Object getMerge() throws Exception{
         List<Integer> idList = new LinkedList<>();
         idList.add(12);idList.add(13);idList.add(14);
@@ -159,25 +166,27 @@ public class StandardController {
         resultobj.put("names",names);
 
         List<JSONObject> items = new LinkedList<>();
-        for(StandardItemDO sid: standardItemDOList){
-            JSONObject temp = new JSONObject();
-            temp.put("item_id", sid.getItem_id());
-            int standardID = sid.getStandard_id();
-            for(JSONObject item : names){
-                if(standardID == (Integer)item.get("id")){
-                    temp.put("standard_name", (String)item.get("name"));
-                    break;
+        if(standardItemDOList.size() > 0){
+            for(StandardItemDO sid: standardItemDOList){
+                JSONObject temp = new JSONObject();
+                temp.put("item_id", sid.getItem_id());
+                int standardID = sid.getStandard_id();
+                for(JSONObject item : names){
+                    if(standardID == (Integer)item.get("id")){
+                        temp.put("standard_name", (String)item.get("name"));
+                        break;
+                    }
                 }
-            }
-            for(JSONObject obj : levelInfo){
-                if((Integer)obj.get("id") == sid.getItem().getSecond_level_id()){
-                    temp.put("first_level", obj.get("firstName"));
-                    temp.put("second_level", obj.get("secondName"));
-                    break;
+                for(JSONObject obj : levelInfo){
+                    if((Integer)obj.get("id") == sid.getItem().getSecond_level_id()){
+                        temp.put("first_level", obj.get("firstName"));
+                        temp.put("second_level", obj.get("secondName"));
+                        break;
+                    }
                 }
+                temp.put("detial", sid.getItem().getShort_cut());
+                items.add(temp);
             }
-            temp.put("detial", sid.getItem().getShort_cut());
-            items.add(temp);
         }
         resultobj.put("items", items);
         resultobj.put("code",0);
