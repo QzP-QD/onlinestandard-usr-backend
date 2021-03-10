@@ -5,6 +5,7 @@ import bupt.hpcn.onlinestandard.service.BusinessService;
 import ch.qos.logback.core.net.SyslogOutputStream;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,7 +17,7 @@ public class BusinessController {
     @Autowired
     private BusinessService businessService;
 
-    @RequestMapping("/getBusiness")
+    @GetMapping("/getBusiness")
     public Object getBusiness() throws Exception{
         List<BusinessDO> result = businessService.getBusiness();
         JSONObject jobj = new JSONObject();
