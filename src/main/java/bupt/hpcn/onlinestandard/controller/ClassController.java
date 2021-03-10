@@ -4,6 +4,7 @@ import bupt.hpcn.onlinestandard.domain.ClassDO;
 import bupt.hpcn.onlinestandard.service.ClassService;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +19,7 @@ public class ClassController {
     @Autowired
     private ClassService classService;
 
-    @RequestMapping(value="/getClass", method= RequestMethod.GET)
+    @GetMapping(value="/getClass")
     public Object getMyClass(int id, String name) throws Exception{
         int selectID = id;
         String selectName = name;
