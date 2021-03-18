@@ -152,10 +152,12 @@ public class StandardController {
     }
 
     @PostMapping(value="/MergePage")
+//    @RequestBody String idLists
     public Object getMerge(@RequestBody String idLists) throws Exception{
         List<Integer> tempList = new LinkedList<>();
 
         List<Integer> idList = JSONArray.parseArray(idLists,Integer.class);
+//        List<Integer> idList = new LinkedList<>();
 //        idList.add(12);idList.add(13);idList.add(14);
         //1、获取所有的 standard_item 信息
         List<StandardItemDO> standardItemDOList = standardItemService.getStandardItemByStandard(idList);
