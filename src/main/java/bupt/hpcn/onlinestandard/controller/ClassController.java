@@ -19,6 +19,16 @@ public class ClassController {
     @Autowired
     private ClassService classService;
 
+    @GetMapping(path="/getAllClasses")
+    public Object getAllClasses() throws Exception{
+        JSONObject resultobj = new JSONObject();
+        List<ClassDO> classList = classService.getAllClasses();
+
+        resultobj.put("result", classList);
+        resultobj.put("code", 0);
+        return resultobj;
+    }
+
     @GetMapping(value="/getClass")
     public Object getMyClass(int id, String name) throws Exception{
         int selectID = id;

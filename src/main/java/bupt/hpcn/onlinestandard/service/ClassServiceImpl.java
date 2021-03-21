@@ -16,4 +16,9 @@ public class ClassServiceImpl implements ClassService{
     public List<ClassDO> getMyClass(int id, String name)throws Exception {
         return classMapper.getMyClass(id, name);
     }
+
+    @Override
+    public List<ClassDO> getAllClasses() throws Exception {
+        return classMapper.getAllClasses();
+    }
 }

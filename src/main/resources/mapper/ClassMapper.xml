@@ -16,4 +16,8 @@
             </if>
         </if>
     </select>
+
+    <select id="getAllClasses" resultType="bupt.hpcn.onlinestandard.domain.ClassDO">
+        select * from class_table
+    </select>
 </mapper>

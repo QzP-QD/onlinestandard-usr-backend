@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import sun.awt.image.ImageWatched;
 import sun.rmi.server.InactiveGroupException;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -31,6 +33,22 @@ public class StandardController {
     @Autowired
     private PropertyInfoService propertyInfoService;
 
+    @GetMapping(path="/getAll",produces = "application/json")
+    public Object getAllStandards() throws Exception{
+        JSONObject resultobj = new JSONObject();
+        List<JSONObject> standardList = standardService.getAllStandards();
+        for(int i = 0 ; i < standardList.size(); i ++){
+            JSONObject temp = standardList.get(i);
+            Date date = (Date) temp.get("date");
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+            String dateStr=sdf.format(date);
+            temp.put("date", dateStr);
+        }
+        resultobj.put("result", standardList);
+        resultobj.put("code", 0);
+
+        return resultobj;
+    }
     @GetMapping(value="/getBybusiness")
     public Object getByBusiness(String activeBusiness) throws Exception{
         int businessID = businessService.getBusinessId(activeBusiness);
@@ -49,7 +67,9 @@ public class StandardController {
             JSONObject tempobj = new JSONObject();
             tempobj.put("id", resultList.get(i).getId());
             tempobj.put("name", resultList.get(i).getName());
-            tempobj.put("date", resultList.get(i).getDate());
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+            String dateStr=sdf.format(resultList.get(i).getDate());
+            tempobj.put("date", dateStr);
 
             for(ClassDO myclass: classList){
                 if(myclass.getId() == resultList.get(i).getClass_id()){
@@ -172,7 +192,6 @@ public class StandardController {
         resultobj.put("names",names);
 
         List<JSONObject> items = new LinkedList<>();
-        System.out.println(standardItemDOList.size());
         if(standardItemDOList.size() > 0){
             for(StandardItemDO sid: standardItemDOList){
                 JSONObject temp = new JSONObject();

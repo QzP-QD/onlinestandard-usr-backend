@@ -16,4 +16,6 @@ public interface StandardMapper {
     StandardDO getStandardDetail(Integer standardID);
     //获取场景标准名称列表
     List<JSONObject> getNames(List<Integer> idList);
+    //获取所有场景标准
+    List<JSONObject> getAllStandards();
 }

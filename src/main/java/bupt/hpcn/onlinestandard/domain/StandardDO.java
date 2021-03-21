@@ -1,5 +1,7 @@
 package bupt.hpcn.onlinestandard.domain;
 
+import java.sql.Date;
+
 public class StandardDO {
     private int id;
     private int business_id;
@@ -8,7 +10,7 @@ public class StandardDO {
     private String file;
     private int province_id;
     private int city_id;
-    private String date;
+    private Date date;
 
     @Override
     public String toString() {
@@ -80,11 +82,11 @@ public class StandardDO {
         this.city_id = city_id;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 }

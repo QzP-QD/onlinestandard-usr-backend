@@ -31,12 +31,14 @@ public class LocationController {
             JSONObject temp = new JSONObject();
             temp.put("label",myprov.getName());
             temp.put("value",myprov.getName());
+            temp.put("id",myprov.getId());
             resultprov.add(temp);
         }
 
         for(CityDO mycity : cityList){
             JSONObject temp = new JSONObject();
             temp.put("label",mycity.getName());
+            temp.put("id",mycity.getId());
             for(ProvinceDO myprov : provList){
                 if(mycity.getProv_id() == myprov.getId()){
                     temp.put("prov",myprov.getName());

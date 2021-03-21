@@ -9,4 +9,5 @@ public interface StandardService {
     List<StandardDO> getStandardByBusiness(int businessID) throws Exception;
     StandardDO getStandardDetail(int standardID) throws Exception;
     List<JSONObject> getNames(List<Integer> idList) throws Exception;
+    List<JSONObject> getAllStandards() throws Exception;
 }

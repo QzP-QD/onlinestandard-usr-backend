@@ -18,4 +18,9 @@
         </foreach>
     </select>
 
+    <select id="getAllStandards" resultType="com.alibaba.fastjson.JSONObject">
+        select *
+        from standard_table
+    </select>
+
 </mapper>

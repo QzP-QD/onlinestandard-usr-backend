@@ -27,4 +27,9 @@ public class StandardServiceImpl implements StandardService{
     public List<JSONObject> getNames(List<Integer> idList) throws Exception{
         return standardMapper.getNames(idList);
     }
+
+    @Override
+    public List<JSONObject> getAllStandards() throws Exception {
+        return standardMapper.getAllStandards();
+    }
 }

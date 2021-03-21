@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ClassService {
     List<ClassDO> getMyClass(int id, String name) throws Exception;
+    List<ClassDO> getAllClasses() throws Exception;
 }

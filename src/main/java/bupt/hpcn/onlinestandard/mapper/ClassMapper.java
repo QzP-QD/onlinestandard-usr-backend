@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface ClassMapper {
     List<ClassDO> getMyClass(int id, String name);
+    List<ClassDO> getAllClasses();
 }
